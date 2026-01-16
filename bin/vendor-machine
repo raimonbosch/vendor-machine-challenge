@@ -1,7 +1,14 @@
 #!/bin/bash
 
+if [ -z "$1" ]; then
+  echo "ERR"
+  exit 1
+fi
+
+EXPR="$1"
+
 # Call the CI4 CLI command and capture its output
-output=$(php spark vendor_machine:run | tail -n +4)
+output=$(php spark vendor_machine:run "$EXPR" | tail -n +4)
 
 # Print the output
 echo "$output"

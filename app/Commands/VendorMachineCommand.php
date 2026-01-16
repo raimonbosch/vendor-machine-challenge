@@ -7,6 +7,7 @@ use CodeIgniter\CLI\CLI;
 use CodeIgniter\CLI\Commands;
 use Psr\Log\LoggerInterface;
 use VendorMachine\Application\VendorMachineUseCase;
+use VendorMachine\Domain\InvalidVendorMachineInputException;
 
 class VendorMachineCommand extends BaseCommand
 {
@@ -19,10 +20,21 @@ class VendorMachineCommand extends BaseCommand
         parent::__construct($logger, $commands);
     }
 
+    /**
+     * @throws InvalidVendorMachineInputException
+     */
     public function run(array $params)
     {
-        /** @var VendorMachineUseCase $useCase */
-        $useCase = service('VendorMachineUseCase');
-        CLI::write($useCase->execute("whatever"));
+        try {
+            /** @var VendorMachineUseCase $useCase */
+            $useCase = service('VendorMachineUseCase');
+            CLI::write($useCase->execute($params));
+        } catch (InvalidVendorMachineInputException $e) {
+            $this->logger->error($e->getMessage(), ['params' => $params]);
+            CLI::write("ERR_INPUT");
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
+            CLI::write("ERR_UNKNOWN");
+        }
     }
 }
