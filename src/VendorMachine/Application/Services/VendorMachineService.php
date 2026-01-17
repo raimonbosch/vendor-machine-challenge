@@ -3,6 +3,7 @@
 namespace VendorMachine\Application\Services;
 
 use VendorMachine\Application\Dto\VendorMachineServiceResponseDTO;
+use VendorMachine\Domain\Exceptions\AllocationCoinsException;
 use VendorMachine\Domain\Repository\CoinRepository;
 use VendorMachine\Domain\Repository\ProductRepository;
 use VendorMachine\Domain\ValueObjects\Action;
@@ -70,15 +71,21 @@ class VendorMachineService
             );
         }
 
-        $coins = $this->userCoinsRepository->subtract($product->priceInCents());
+        try{
+            $cashierCoins = $this->userCoinsRepository->subtract($product->priceInCents());
+            $changeCoins = $this->userCoinsRepository->getChange();
+        } catch (AllocationCoinsException $e) {
+            $cashierCoins = $this->userCoinsRepository->getChange();
+            $changeCoins = $this->cashierRepository->subtract($availableCents - $product->priceInCents());
+        }
 
-        foreach ($coins as $coin) {
+        foreach ($cashierCoins as $coin) {
             $this->cashierRepository->add($coin);
         }
 
         return new VendorMachineServiceResponseDTO(
             $product,
-            $this->userCoinsRepository->getChange(),
+            $changeCoins,
             $product->name()
         );
     }

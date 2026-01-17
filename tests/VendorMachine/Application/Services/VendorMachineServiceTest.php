@@ -70,4 +70,12 @@ class VendorMachineServiceTest extends CIUnitTestCase
         $this->assertEquals([], $result->coinChange);
         $this->assertEquals('Not enough funds', $result->message);
     }
+
+    public function testBuyWaterWithUnevenChange() {
+        $result = $this->sut->execute(new Action(Action::GET_WATER), [Coin::quarter(), Coin::quarter(), Coin::quarter()]);
+
+        $this->assertEquals(new Water(), $result->product);
+        $this->assertEquals([Coin::tenCents()], $result->coinChange);
+        $this->assertEquals(Water::NAME, $result->message);
+    }
 }
