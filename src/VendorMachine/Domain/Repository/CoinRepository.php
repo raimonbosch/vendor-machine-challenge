@@ -13,4 +13,9 @@ interface CoinRepository
      * @return Coin[]
      */
     public function subtract(int $cents): array;
+
+    /**
+     * @return Coin[]
+     */
+    public function getChange(): array;
 }

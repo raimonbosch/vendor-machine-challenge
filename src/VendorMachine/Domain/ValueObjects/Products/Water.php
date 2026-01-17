@@ -6,11 +6,11 @@ use VendorMachine\Domain\ValueObjects\Product;
 
 class Water implements Product
 {
-    private const NAME = 'WATER';
+    public const NAME = 'WATER';
 
-    public function price(): float
+    public function priceInCents(): int
     {
-        return 0.65;
+        return 65;
     }
 
     public function name(): string

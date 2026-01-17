@@ -2,6 +2,7 @@
 
 namespace VendorMachine\Infrastructure\Repository;
 
+use VendorMachine\Domain\Exceptions\ProductNotAvailableException;
 use VendorMachine\Domain\Repository\ProductRepository;
 use VendorMachine\Domain\ValueObjects\Product;
 
@@ -14,14 +15,18 @@ class ProductArrayRepository implements ProductRepository
         $this->repositoryProducts[] = $product;
     }
 
-    public function deliver(Product $product): ?Product
+    public function deliver(string $productName): Product
     {
         $productToDeliver = null;
         foreach ($this->repositoryProducts as $i => $repositoryProduct) {
-            if ($repositoryProduct->name() === $product->name()) {
+            if ($repositoryProduct->name() === $productName) {
                 $productToDeliver = $repositoryProduct;
                 unset($this->repositoryProducts[$i]);
             }
+        }
+
+        if ($productToDeliver === null) {
+            throw new ProductNotAvailableException("$productName is not available.");
         }
 
         $this->repositoryProducts = array_values($this->repositoryProducts);

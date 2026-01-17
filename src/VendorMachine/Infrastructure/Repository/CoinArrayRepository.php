@@ -35,6 +35,20 @@ class CoinArrayRepository implements CoinRepository
         return $allocatedCoins;
     }
 
+    /**
+     * @return Coin[]
+     */
+    public function getChange(): array
+    {
+        $coinsToDeliver = [];
+        foreach ($this->coins as $i => $coin) {
+            unset($this->coins[$i]);
+            $coinsToDeliver []= $coin;
+        }
+
+        return $coinsToDeliver;
+    }
+
     private function popAllocatedCoin(Coin $allocatedCoin): void {
         foreach ($this->coins as $i => $coin) {
             if ($coin->getCents() === $allocatedCoin->getCents()) {

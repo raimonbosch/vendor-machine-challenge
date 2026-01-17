@@ -8,5 +8,5 @@ interface ProductRepository
 {
     public function add(Product $product): void;
 
-    public function deliver(Product $product): ?Product;
+    public function deliver(string $productName): Product;
 }

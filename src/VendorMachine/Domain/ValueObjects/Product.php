@@ -4,7 +4,7 @@ namespace VendorMachine\Domain\ValueObjects;
 
 interface Product
 {
-    public function price(): float;
+    public function priceInCents(): int;
 
     public function name(): string;
 }

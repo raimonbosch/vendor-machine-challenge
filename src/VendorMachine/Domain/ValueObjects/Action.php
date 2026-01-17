@@ -19,7 +19,7 @@ class Action {
         self::SERVICE
     ];
 
-    public function __construct(string $action) {
+    public function __construct(private readonly string $action) {
         if (!self::isValid($action)) {
             throw new InvalidActionException();
         }
@@ -27,5 +27,9 @@ class Action {
 
     public static function isValid(string $action): bool {
         return in_array($action, self::acceptedActions);
+    }
+
+    public function getName(): string {
+        return $this->action;
     }
 }

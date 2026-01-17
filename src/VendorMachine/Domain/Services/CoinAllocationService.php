@@ -2,6 +2,7 @@
 
 namespace VendorMachine\Domain\Services;
 
+use VendorMachine\Domain\Exceptions\AllocationCoinsException;
 use VendorMachine\Domain\ValueObjects\Coin;
 
 class CoinAllocationService
@@ -11,6 +12,7 @@ class CoinAllocationService
      * @param Coin[] $coins
      * @param int $amountInCents
      * @return Coin[]
+     * @throws AllocationCoinsException
      */
     public function allocateCoins(array $coins, int $amountInCents): array
     {
@@ -23,7 +25,7 @@ class CoinAllocationService
             }
         }
 
-        return [];
+        throw new AllocationCoinsException();
     }
 
     /**
