@@ -5,12 +5,18 @@ namespace VendorMachine\Domain\ValueObjects;
 use VendorMachine\Domain\Exceptions\InvalidActionException;
 
 class Action {
-    const acceptedActions = [
-        'GET-SODA',
-        'GET-WATER',
-        'GET-JUICE',
-        'RETURN-COIN',
-        'SERVICE'
+    public const GET_SODA = 'GET-SODA';
+    public const GET_WATER = 'GET-WATER';
+    public const GET_JUICE = 'GET-JUICE';
+    public const RETURN_COIN = 'RETURN-COIN';
+    public const SERVICE = 'SERVICE';
+
+    public const acceptedActions = [
+        self::GET_SODA,
+        self::GET_WATER,
+        self::GET_JUICE,
+        self::RETURN_COIN,
+        self::SERVICE
     ];
 
     public function __construct(string $action) {

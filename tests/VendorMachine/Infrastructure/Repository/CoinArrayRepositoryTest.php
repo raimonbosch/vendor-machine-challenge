@@ -20,14 +20,13 @@ class CoinArrayRepositoryTest extends CIUnitTestCase
 
     public function testAddAndSubtract(): void
     {
-        $this->sut->add(new Coin('1'));
-        $this->sut->add(new Coin('0.25'));
-        $this->sut->add(new Coin('0.25'));
+        $this->sut->add(Coin::euro());
+        $this->sut->add(Coin::quarter());
+        $this->sut->add(Coin::quarter());
 
         $coins = $this->sut->subtract(125);
 
-        $this->assertEquals([new Coin('1'), new Coin('0.25')], $coins);
-        $this->assertEquals([new Coin('0.25')], $this->sut->getAvailableCoins());
+        $this->assertEquals([Coin::euro(), Coin::quarter()], $coins);
+        $this->assertEquals([Coin::quarter()], $this->sut->getAvailableCoins());
     }
-
 }

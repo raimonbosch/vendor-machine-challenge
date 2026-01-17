@@ -5,14 +5,19 @@ namespace VendorMachine\Domain\ValueObjects;
 use VendorMachine\Domain\Exceptions\InvalidCoinException;
 
 class Coin {
-    private $cents;
+    public const FIVE_CENTS = '0.05';
+    public const TEN_CENTS = '0.10';
+    public const QUARTER = '0.25';
+    public const ONE_EURO = '1';
 
     public const acceptedCoins = [
-        '0.05',
-        '0.10',
-        '0.25',
-        '1'
+        self::FIVE_CENTS,
+        self::TEN_CENTS,
+        self::QUARTER,
+        self::ONE_EURO,
     ];
+
+    private $cents;
 
     /**
      * @throws InvalidCoinException
@@ -35,5 +40,25 @@ class Coin {
 
     public function getCents(): int {
         return $this->cents;
+    }
+
+    public static function euro(): self
+    {
+        return new self(self::ONE_EURO);
+    }
+
+    public static function quarter(): self
+    {
+        return new self(self::QUARTER);
+    }
+
+    public static function tenCents(): self
+    {
+        return new self(self::TEN_CENTS);
+    }
+
+    public static function fiveCents(): self
+    {
+        return new self(self::FIVE_CENTS);
     }
 }

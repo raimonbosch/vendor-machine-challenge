@@ -28,31 +28,31 @@ class CoinAllocationServiceTest extends CIUnitTestCase
     {
         return [
             'exact 1 euro' => [
-                [new Coin(1)],
+                [Coin::euro()],
                 100,
-                [new Coin(1)],
+                [Coin::euro()],
             ],
 
             'two quarters' => [
-                [new Coin(0.25), new Coin(0.25)],
+                [Coin::quarter(), Coin::quarter()],
                 50,
-                [new Coin(0.25), new Coin(0.25)],
+                [Coin::quarter(), Coin::quarter()],
             ],
 
             'mixed coins' => [
-                [new Coin(1), new Coin(0.25), new Coin(0.10), new Coin(0.05)],
+                [Coin::euro(), Coin::quarter(), Coin::tenCents(), Coin::fiveCents()],
                 40,
-                [new Coin(0.25), new Coin(0.10), new Coin(0.05)],
+                [Coin::quarter(), Coin::tenCents(), Coin::fiveCents()],
             ],
 
             'insufficient amount returns empty' => [
-                [new Coin(0.10)],
+                [Coin::tenCents()],
                 50,
                 [],
             ],
 
             'zero amount returns empty' => [
-                [new Coin(1), new Coin(0.25)],
+                [Coin::euro(), Coin::quarter()],
                 0,
                 [],
             ],
