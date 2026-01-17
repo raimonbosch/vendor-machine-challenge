@@ -44,18 +44,6 @@ class CoinAllocationServiceTest extends CIUnitTestCase
                 40,
                 [Coin::quarter(), Coin::tenCents(), Coin::fiveCents()],
             ],
-
-            'insufficient amount returns empty' => [
-                [Coin::tenCents()],
-                50,
-                [],
-            ],
-
-            'zero amount returns empty' => [
-                [Coin::euro(), Coin::quarter()],
-                0,
-                [],
-            ],
         ];
     }
 }

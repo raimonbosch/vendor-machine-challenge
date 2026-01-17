@@ -62,4 +62,15 @@ class CoinArrayRepository implements CoinRepository
     public function getAvailableCoins(): array {
         return $this->coins;
     }
+
+    /**
+     * @param Coin[] $coins
+     * @return void
+     */
+    public function recharge(array $coins): void
+    {
+        foreach ($coins as $coin) {
+            $this->add($coin);
+        }
+    }
 }

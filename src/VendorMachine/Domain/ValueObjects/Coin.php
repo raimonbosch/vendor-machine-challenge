@@ -18,6 +18,7 @@ class Coin {
     ];
 
     private $cents;
+    private $name;
 
     /**
      * @throws InvalidCoinException
@@ -31,11 +32,16 @@ class Coin {
             throw new InvalidCoinException("Coin value is not accepted");
         }
 
+        $this->name = $coin;
         $this->cents = (int)(100*((float) $coin));
     }
 
     public static function isValid(string $action): bool {
         return in_array($action, self::acceptedCoins);
+    }
+
+    public function getName(): string {
+        return $this->name;
     }
 
     public function getCents(): int {

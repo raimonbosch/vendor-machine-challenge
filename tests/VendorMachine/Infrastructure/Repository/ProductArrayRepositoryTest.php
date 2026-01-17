@@ -3,6 +3,7 @@
 namespace Tests\VendorMachine\Infrastructure\Repository;
 
 use CodeIgniter\Test\CIUnitTestCase;
+use VendorMachine\Domain\Exceptions\ProductNotAvailableException;
 use VendorMachine\Domain\ValueObjects\Products\Juice;
 use VendorMachine\Domain\ValueObjects\Products\Water;
 use VendorMachine\Infrastructure\Repository\ProductArrayRepository;
@@ -23,21 +24,20 @@ class ProductArrayRepositoryTest extends CIUnitTestCase
         $this->sut->add($juice);
         $this->assertEquals([$juice], $this->sut->getAvailableProducts());
 
-        $product = $this->sut->deliver($juice);
+        $product = $this->sut->deliver($juice->name());
         $this->assertEquals($juice, $product);
         $this->assertEquals([], $this->sut->getAvailableProducts());
     }
 
     public function testAddAndNoDeliver(): void
     {
+        $this->expectException(ProductNotAvailableException::class);
         $juice = new Juice();
         $water = new Water();
 
         $this->sut->add($juice);
 
-        $product = $this->sut->deliver($water);
-        $this->assertNull($product);
-        $this->assertEquals([$juice], $this->sut->getAvailableProducts());
+        $product = $this->sut->deliver($water->name());
     }
 
 }

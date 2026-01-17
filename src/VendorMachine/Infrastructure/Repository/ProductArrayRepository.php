@@ -37,4 +37,15 @@ class ProductArrayRepository implements ProductRepository
     public function getAvailableProducts(): array {
         return $this->repositoryProducts;
     }
+
+    /**
+     * @param Product[] $products
+     * @return void
+     */
+    public function recharge(array $products): void
+    {
+        foreach ($products as $product) {
+            $this->add($product);
+        }
+    }
 }

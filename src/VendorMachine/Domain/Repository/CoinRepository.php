@@ -18,4 +18,9 @@ interface CoinRepository
      * @return Coin[]
      */
     public function getChange(): array;
+
+    /**
+     * @param Coin[] $coins
+     */
+    public function recharge(array $coins): void;
 }
