@@ -7,6 +7,7 @@ use VendorMachine\Domain\ValueObjects\Coin;
 class CoinAllocationService
 {
     /**
+     * This is an allocation algorithm using a O(n²) performance. Should be enough for a vending machine use case.
      * @param Coin[] $coins
      * @param int $amountInCents
      * @return Coin[]
@@ -16,7 +17,7 @@ class CoinAllocationService
         usort($coins, fn($a, $b) => $b->getCents() <=> $a->getCents());
 
         for ($start = 0; $start < count($coins); $start++) {
-            $result = $this->choseCoins($coins, $amountInCents, $start);
+            $result = $this->chooseCoins($coins, $amountInCents, $start);
             if (count($result) > 0) {
                 return $result;
             }
@@ -31,7 +32,7 @@ class CoinAllocationService
      * @param int $start
      * @return Coin[]
      */
-    private function choseCoins(array $coins, int $amountInCents, int $start = 0): array
+    private function chooseCoins(array $coins, int $amountInCents, int $start = 0): array
     {
         $chosenCoins = [];
         foreach ($coins as $i => $coin) {
