@@ -7,6 +7,7 @@ use CodeIgniter\CLI\CLI;
 use CodeIgniter\CLI\Commands;
 use Psr\Log\LoggerInterface;
 use VendingMachine\Application\VendingMachineUseCase;
+use VendingMachine\Domain\Exceptions\InvalidActionException;
 use VendingMachine\Domain\Exceptions\InvalidVendingMachineInputException;
 
 class VendingMachineCommand extends BaseCommand
@@ -30,6 +31,9 @@ class VendingMachineCommand extends BaseCommand
             $useCase = service('VendingMachineUseCase');
             CLI::write($useCase->execute($params));
         } catch (InvalidVendingMachineInputException $e) {
+            $this->logger->error($e->getMessage(), ['params' => $params]);
+            CLI::write("ERR_INPUT");
+        } catch (InvalidActionException $e) {
             $this->logger->error($e->getMessage(), ['params' => $params]);
             CLI::write("ERR_INPUT");
         } catch (\Exception $e) {

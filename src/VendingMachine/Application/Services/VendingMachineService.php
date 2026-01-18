@@ -69,7 +69,7 @@ class VendingMachineService
             return new VendingMachineServiceResponseDTO(
                 null,
                 [],
-                "Not enough funds"
+                "NOT-ENOUGH-FUNDS"
             );
         }
 

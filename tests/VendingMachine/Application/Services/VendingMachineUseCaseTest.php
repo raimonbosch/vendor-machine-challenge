@@ -34,6 +34,16 @@ class VendingMachineUseCaseTest extends CIUnitTestCase
         $this->assertEquals('SODA, 0.25', $result);
     }
 
+    public function testBuySodaWithNoEnoughFunds(): void
+    {
+        $this->vendingMachineService->method('execute')
+            ->willReturn(new VendingMachineServiceResponseDTO(null, [], 'NOT-ENOUGH-FUNDS'));
+
+        $result = $this->sut->execute(['1, GET-SODA']);
+
+        $this->assertEquals('NOT-ENOUGH-FUNDS', $result);
+    }
+
     public function testServiceAction(): void
     {
         $this->vendingMachineService->method('execute')

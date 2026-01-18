@@ -7,14 +7,14 @@ help: Makefile
 
 ## shell:               Interactive shell to use commands inside docker
 shell:
-	docker compose exec vendor-machine bash
+	docker compose exec vending-machine bash
 
 ## test:               Run all tests
 test:
-	docker compose exec vendor-machine composer install
-	docker compose exec -e XDEBUG_MODE=coverage vendor-machine ./vendor/bin/phpunit tests/VendingMachine/
-	docker compose exec vendor-machine npm install
-	docker compose exec vendor-machine npm test
+	docker compose exec vending-machine composer install
+	docker compose exec -e XDEBUG_MODE=coverage vending-machine ./vendor/bin/phpunit tests/VendingMachine/
+	docker compose exec vending-machine npm install
+	docker compose exec vending-machine npm test
 
 ## build:                  Run the necessary services to build
 build:
@@ -34,8 +34,8 @@ run:
 ifndef EXPR
 	$(error EXPR is undefined. Example: make run EXPR="1, 0.25, 0.25, GET-SODA")
 endif
-	docker compose exec vendor-machine ./bin/vendor-machine "$(EXPR)"
+	docker compose exec vending-machine ./bin/vending-machine "$(EXPR)"
 
 ## run-interactive:                  Run vendor machine in a shell GUI
 run-interactive:
-	docker compose exec vendor-machine bash -c "php spark vending_machine:interactive"
+	docker compose exec vending-machine bash -c "php spark vending_machine:interactive"

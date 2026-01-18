@@ -29,6 +29,10 @@ class VendingMachineParserService
             }
         }
 
+        if ($action === null) {
+            throw new InvalidActionException();
+        }
+
         return new VendingMachineParserResponseDTO($action, $coins);
     }
 

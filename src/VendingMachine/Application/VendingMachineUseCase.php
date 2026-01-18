@@ -35,8 +35,8 @@ class VendingMachineUseCase
 
         $vendingMachineInput = $this->vendingMachineParserService->execute($input[0]);
         $vendingMachineResponse = $this->vendingMachineService->execute(
-            $vendingMachineInput->action,
-            $vendingMachineInput->coins
+            $vendingMachineInput->getAction(),
+            $vendingMachineInput->getCoins()
         );
 
         return $this->processResponse($vendingMachineResponse);

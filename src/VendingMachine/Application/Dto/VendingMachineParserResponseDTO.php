@@ -12,8 +12,21 @@ class VendingMachineParserResponseDTO
      * @param Coin[] $coins
      */
     public function __construct(
-        public readonly ?Action $action,
-        public readonly array $coins
+        private readonly ?Action $action,
+        private readonly array $coins
     ) {
+    }
+
+    public function getAction(): ?Action
+    {
+        return $this->action;
+    }
+
+    /**
+     * @return Coin[]
+     */
+    public function getCoins(): array
+    {
+        return $this->coins;
     }
 }

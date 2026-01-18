@@ -70,7 +70,7 @@ class VendingMachineServiceTest extends CIUnitTestCase
 
         $this->assertEquals(null, $result->getProduct());
         $this->assertEquals([], $result->getCoinChange());
-        $this->assertEquals('Not enough funds', $result->getMessage());
+        $this->assertEquals('NOT-ENOUGH-FUNDS', $result->getMessage());
     }
 
     public function testBuyWaterWithUnevenChange() {
