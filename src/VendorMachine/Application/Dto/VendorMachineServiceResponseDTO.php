@@ -26,28 +26,12 @@ class VendorMachineServiceResponseDTO
      */
     public function getCoinChange(): array
     {
-        if (!isset($this->coinChange)) {
-            return [];
-        }
-
-        return $this->coinChange;
+        return $this->coinChange ?? [];
     }
 
     public function getProduct(): ?Product
     {
         return $this->product;
-    }
-
-    /**
-     * @return Product[]
-     */
-    public function getProducts(): array
-    {
-        if (!isset($this->products)) {
-            return [];
-        }
-
-        return $this->products;
     }
 
     public function getNumberOfProducts(): ?int

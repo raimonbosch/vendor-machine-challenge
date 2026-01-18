@@ -43,7 +43,7 @@ class VendorMachineService
                 return new VendorMachineServiceResponseDTO(
                     null,
                     $this->userCoinsRepository->withdrawChange(),
-                    "Returning coins"
+                    "RETURN-COIN",
                 );
             case Action::SERVICE:
                 return new VendorMachineServiceResponseDTO(
