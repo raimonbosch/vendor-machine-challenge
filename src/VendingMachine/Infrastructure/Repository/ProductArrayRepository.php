@@ -22,6 +22,7 @@ class ProductArrayRepository implements ProductRepository
             if ($repositoryProduct->name() === $productName) {
                 $productToDeliver = $repositoryProduct;
                 unset($this->repositoryProducts[$i]);
+                break;
             }
         }
 
