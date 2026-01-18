@@ -7,6 +7,24 @@ The machine works like all vending machines: it takes money then gives you items
 
 You must have at least have 3 primary items that cost 0.65, 1.00, and 1.50. Also user may hit the button “return coin” to get back the money they’ve entered so far, If you put more money in than the item price, you get the item and change back.
 
+## How to run
+
+To install all the docker build:
+
+> make install
+
+To run individual commands:
+ 
+> make run EXPR="1, 0.25, 0.25, GET-SODA"
+> 
+> make run EXPR="0.10, 0.10, RETURN-COIN"
+>
+> make run EXPR="1, GET-WATER"
+
+To run a set of prepared tests:
+
+> make test
+
 ## Specification
 
 ### Valid set of actions on the vending machine are:
