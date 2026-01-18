@@ -44,6 +44,10 @@ As you may have seen we are using mostly **DDD (Domain Driven Design)** patterns
 
 Docker should be enough as long as you already have a way to run Makefiles.
 
+Tested on Mac OSX Docker Desktop with this versions:
+- Docker version 29.1.3
+- Docker compose v2.40.3-desktop.1
+
 ## Specification
 
 ### Valid set of actions on the vending machine are:
