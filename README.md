@@ -1,4 +1,3 @@
-# Senior Backend Engineer challenge
 ## Vending Machine
 
 The goal of this program is to model a vending machine and the state it must maintain during its operation. How exactly the actions on the machine are driven is left intentionally vague and is up to the candidate
@@ -21,9 +20,17 @@ To run individual commands:
 >
 > make run EXPR="1, GET-WATER"
 
+To run via an interactive shell:
+
+> make run-interactive
+
 To run a set of prepared tests:
 
 > make test
+
+## Requirements
+
+Docker should be enough as long as you already have a way to run Makefiles.
 
 ## Specification
 
