@@ -66,6 +66,10 @@ class CoinArrayRepository implements CoinRepository
 
     public function availableChange(): int
     {
+        if (empty($this->coins)) {
+            return 0;
+        }
+
         $availableCents = 0;
         foreach ($this->coins as $coin) {
             $availableCents += $coin->getCents();

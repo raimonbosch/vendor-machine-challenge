@@ -60,6 +60,18 @@ class VendingMachineServiceTest extends CIUnitTestCase
         $this->assertEquals($resultService1->getNumberOfProducts() - 2, $resultService2->getNumberOfProducts());
     }
 
+    public function testBuySodaAfterNotEnoughFunds() {
+        $result1 = $this->sut->execute(new Action(Action::GET_SODA), [Coin::euro(), Coin::quarter()]);
+        $this->assertNull($result1->getProduct());
+        $this->assertEquals([], $result1->getCoinChange());
+        $this->assertEquals('NOT-ENOUGH-FUNDS', $result1->getMessage());
+
+        $result2 = $this->sut->execute(new Action(Action::GET_SODA), [Coin::quarter()]);
+        $this->assertEquals(new Soda(), $result2->getProduct());
+        $this->assertEquals([], $result2->getCoinChange());
+        $this->assertEquals(Soda::NAME, $result2->getMessage());
+    }
+
     public function testBuyJuice() {
         $result = $this->sut->execute(new Action(Action::GET_JUICE), [Coin::euro()]);
 

@@ -28,7 +28,8 @@ class VendingMachineService
      */
     public function execute(Action $action, array $coins): VendingMachineServiceResponseDTO
     {
-        $availableCents = $this->depositCoins($coins);
+        $this->depositCoins($coins);
+        $availableCents = $this->userCoinsRepository->availableChange();
         switch($action->getName()) {
             case Action::GET_SODA:
                 $product = $this->productRepository->deliver(Soda::NAME);
@@ -94,15 +95,11 @@ class VendingMachineService
 
     /**
      * @param Coin[] $coins
-     * @return int
+     * @return void
      */
-    private function depositCoins(array $coins): int {
-        $cents = 0;
+    private function depositCoins(array $coins): void {
         foreach ($coins as $coin) {
             $this->userCoinsRepository->add($coin);
-            $cents += $coin->getCents();
         }
-
-        return $cents;
     }
 }
